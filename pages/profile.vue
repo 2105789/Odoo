@@ -9,7 +9,7 @@
     <!-- Profile Card -->
     <div class="bg-white rounded-lg shadow-sm border p-6 mb-6">
       <div class="flex items-center mb-6">
-        <div class="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center">
+        <div class="w-20 h-20 bg-indigo-600 rounded-full flex items-center justify-center">
           <span class="text-white font-medium text-2xl">
             {{ getUserInitials() }}
           </span>
@@ -19,7 +19,7 @@
           <p class="text-gray-600">{{ user?.email }}</p>
           <div class="mt-2 flex items-center space-x-4">
             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
-                  :class="user?.role === 'ADMIN' ? 'bg-red-100 text-red-800' : 'bg-blue-100 text-blue-800'">
+                  :class="user?.role === 'ADMIN' ? 'bg-red-100 text-red-800' : 'bg-indigo-100 text-indigo-800'">
               {{ user?.role }}
             </span>
             <span class="text-sm text-gray-500">
@@ -53,7 +53,7 @@
       <div class="flex justify-end">
         <button
           @click="toggleEdit"
-          class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+          class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors"
         >
           {{ isEditing ? 'Cancel' : 'Edit Profile' }}
         </button>
@@ -71,7 +71,7 @@
             <input
               v-model="editForm.firstName"
               type="text"
-              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
               required
             />
           </div>
@@ -80,7 +80,7 @@
             <input
               v-model="editForm.lastName"
               type="text"
-              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
               required
             />
           </div>
@@ -91,7 +91,7 @@
           <input
             v-model="editForm.email"
             type="email"
-            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
             required
           />
         </div>
@@ -107,7 +107,7 @@
           <button
             type="submit"
             :disabled="updating"
-            class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
+            class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-50"
           >
             {{ updating ? 'Updating...' : 'Update Profile' }}
           </button>
@@ -124,7 +124,7 @@
           <div class="flex items-center space-x-3">
             <NuxtLink
               to="/my-questions"
-              class="text-blue-600 hover:text-blue-800 font-medium"
+              class="text-indigo-600 hover:text-indigo-800 font-medium"
             >
               View My Questions
             </NuxtLink>
@@ -140,7 +140,7 @@
           <div class="flex items-center space-x-3">
             <NuxtLink
               to="/my-answers"
-              class="text-blue-600 hover:text-blue-800 font-medium"
+              class="text-indigo-600 hover:text-indigo-800 font-medium"
             >
               View My Answers
             </NuxtLink>

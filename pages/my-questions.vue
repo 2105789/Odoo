@@ -8,7 +8,7 @@
       </div>
       <NuxtLink
         to="/questions/ask"
-        class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+        class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors"
       >
         Ask New Question
       </NuxtLink>
@@ -30,7 +30,7 @@
           <div class="text-sm text-gray-600">Pending</div>
         </div>
         <div class="text-center">
-          <div class="text-2xl font-bold text-blue-600">{{ stats.totalVotes }}</div>
+          <div class="text-2xl font-bold text-indigo-600">{{ stats.totalVotes }}</div>
           <div class="text-sm text-gray-600">Total Votes</div>
         </div>
       </div>
@@ -46,7 +46,7 @@
               v-model="searchQuery"
               type="text"
               placeholder="Search your questions..."
-              class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
               @input="debouncedSearch"
             />
             <svg
@@ -69,7 +69,7 @@
         <div class="w-full md:w-48">
           <select
             v-model="statusFilter"
-            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
             @change="fetchQuestions"
           >
             <option value="all">All Questions</option>
@@ -83,7 +83,7 @@
         <div class="w-full md:w-48">
           <select
             v-model="sortBy"
-            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
             @change="fetchQuestions"
           >
             <option value="newest">Newest First</option>
@@ -119,7 +119,7 @@
           <div class="mt-4">
             <NuxtLink
               to="/questions/ask"
-              class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
             >
               Ask Your First Question
             </NuxtLink>
@@ -140,7 +140,7 @@
               <h3 class="text-lg font-semibold text-gray-900 mb-2">
                 <NuxtLink
                   :to="`/questions/${question.id}`"
-                  class="hover:text-blue-600 transition-colors"
+                  class="hover:text-indigo-600 transition-colors"
                 >
                   {{ question.title }}
                 </NuxtLink>
@@ -154,7 +154,7 @@
                 <span
                   v-for="tag in question.tags"
                   :key="tag.id"
-                  class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
+                  class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800"
                 >
                   {{ tag.name }}
                 </span>
@@ -232,7 +232,7 @@
           @click="goToPage(page)"
           :class="[
             page === pagination.page
-              ? 'bg-blue-50 border-blue-500 text-blue-600'
+              ? 'bg-indigo-50 border-indigo-500 text-indigo-600'
               : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50',
             'relative inline-flex items-center px-4 py-2 border text-sm font-medium'
           ]"
