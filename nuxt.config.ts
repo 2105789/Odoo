@@ -5,7 +5,7 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss'
   ],
   nitro: {
-    preset: 'netlify'
+    preset: 'netlify-edge'
   },
   runtimeConfig: {
     // Server-side environment variables
