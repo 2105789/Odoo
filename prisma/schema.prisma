@@ -1,0 +1,147 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  firstName String?
+  lastName  String?
+  role      Role     @default(USER)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Q&A Forum relations
+  questions     Question[]
+  answers       Answer[]
+  votes         Vote[]
+  notifications Notification[]
+
+  @@map("users")
+}
+
+model Question {
+  id          String   @id @default(cuid())
+  title       String
+  description String   @db.Text
+  authorId    String
+  author      User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  acceptedAnswerId String?
+  acceptedAnswer   Answer? @relation("AcceptedAnswer", fields: [acceptedAnswerId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  answers     Answer[] @relation("QuestionAnswers")
+  tags        QuestionTag[]
+  votes       Vote[]
+
+  @@map("questions")
+}
+
+model Answer {
+  id          String   @id @default(cuid())
+  content     String   @db.Text
+  authorId    String
+  author      User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  questionId  String
+  question    Question @relation("QuestionAnswers", fields: [questionId], references: [id], onDelete: Cascade)
+  isAccepted  Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  acceptedBy  Question[] @relation("AcceptedAnswer")
+  votes       Vote[]
+
+  @@map("answers")
+}
+
+model Tag {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?
+  color       String   @default("#3B82F6")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  questions   QuestionTag[]
+
+  @@map("tags")
+}
+
+model QuestionTag {
+  id         String   @id @default(cuid())
+  questionId String
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  tagId      String
+  tag        Tag      @relation(fields: [tagId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+
+  @@unique([questionId, tagId])
+  @@map("question_tags")
+}
+
+model Vote {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  questionId String?
+  question   Question? @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  answerId   String?
+  answer     Answer?  @relation(fields: [answerId], references: [id], onDelete: Cascade)
+  type       VoteType
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([userId, questionId])
+  @@unique([userId, answerId])
+  @@map("votes")
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      NotificationType
+  title     String
+  message   String
+  isRead    Boolean  @default(false)
+  entityId  String?  // ID of the related entity (question, answer, etc.)
+  entityType String? // Type of the entity (question, answer, etc.)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("notifications")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum VoteType {
+  UPVOTE
+  DOWNVOTE
+}
+
+enum NotificationType {
+  QUESTION_ANSWERED
+  ANSWER_ACCEPTED
+  MENTION
+  QUESTION_COMMENTED
+}
