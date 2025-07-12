@@ -4,9 +4,6 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss'
   ],
-  nitro: {
-    preset: 'netlify-edge'
-  },
   runtimeConfig: {
     // Server-side environment variables
     jwtSecret: process.env.JWT_SECRET || 'your-super-secret-jwt-key',
