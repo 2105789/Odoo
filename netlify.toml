@@ -1,0 +1,20 @@
+[build]
+  command = "prisma generate && npm run build"
+  publish = ".output/public"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+# No plugins needed for Nuxt 3
+
+# Environment variables for production
+[context.production.environment]
+  NODE_ENV = "production"
+
+# Build settings for branch previews
+[context.branch-deploy]
+  command = "prisma generate && npm run build"
+
+# Build settings for deploy previews
+[context.deploy-preview]
+  command = "prisma generate && npm run build" 
