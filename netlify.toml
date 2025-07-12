@@ -1,6 +1,6 @@
 [build]
   command = "prisma generate && npm run build"
-  publish = ".output/public"
+  publish = ".output"
 
 [build.environment]
   NODE_VERSION = "18"
